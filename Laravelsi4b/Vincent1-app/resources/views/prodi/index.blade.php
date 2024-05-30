@@ -1,6 +1,6 @@
 @extends('layout.main')
 
-@section('title', 'Fakultas')
+@section('title', 'Prodi')
     
 @section('content')
     <h1>UMDP</h1>
@@ -12,6 +12,8 @@
                   <p class="card-description">
                   List data program studi
                   </p>
+                  {{-- tombol tambah --}}
+                  <a href="{{ route('prodi.create') }}" class="btn btn-rounded btn-primary">tambah</a>
                   <div class="table-responsive">
                     <table class="table">
                       <thead>
@@ -25,7 +27,7 @@
                         @foreach ($prodi as $item)
                             <tr>
                                 <td>{{ $item["nama"] }} 
-                                <td>{{ $item["singkatam"] }} </td>
+                                <td>{{ $item["singkatan"] }} </td>
                                 <td> {{ $item["fakultas"] ["nama"] }}</td>
                             </tr>
                         @endforeach
@@ -36,4 +38,16 @@
               </div>
             </div>
 </div>
+
+@if (session('success'))
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+    Swal.fire({
+    title: "Sukses",
+    text: "{{ session('success') }}",
+    icon: "success"
+  });
+  </script>
+@endif
+
 @endsection
