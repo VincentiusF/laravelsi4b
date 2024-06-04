@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Fakultas;
+use App\Models\Prodi;
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 
@@ -12,7 +14,9 @@ class MahasiswaController extends Controller
      */
     public function index()
     {
-        //
+         $mahasiswa = Mahasiswa::all(); // select * from fakultas
+        return view('mahasiswa.index')
+                 ->with('mahasiswa', $mahasiswa);
     }
 
     /**
@@ -20,7 +24,8 @@ class MahasiswaController extends Controller
      */
     public function create()
     {
-        //
+        $prodi = Prodi::all();
+        return view('mahasiswa.create')->with('prodi', $prodi);
     }
 
     /**
@@ -28,7 +33,19 @@ class MahasiswaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $val = $request->validate([
+            'npm' => "required|unique:mahasiswas",
+            'nama' => "required",
+            'tempat_lahir' =>"required",
+            'tanggal_lahir' =>"required",
+            'alamat' =>"required",
+            'prodi_id' =>"required",
+            'url_foto' =>"required",
+        ]);
+
+        Mahasiswa::create($val);
+
+        return redirect()->route('mahasiswa.index')->with('success', $val['nama'].' berhasil disimpan');
     }
 
     /**

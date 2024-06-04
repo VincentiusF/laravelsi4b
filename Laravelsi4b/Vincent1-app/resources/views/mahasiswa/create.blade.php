@@ -12,7 +12,7 @@
                   <p class="card-description">
                     Formulir Tambah Mahasiswa
                   </p>
-                  <form method="POST" action="{{ route('fakultas.store') }}" 
+                  <form method="POST" action="{{ route('mahasiswa.store') }}" 
                   class="forms-sample">
                   @csrf
                     <div class="form-group">
@@ -47,6 +47,26 @@
                       <label for="alamat">Alamat</label>
                       <input type="text" class="form-control" name="alamat" value="{{ old('tempat_lahir') }}"placeholder="Tempat Lahir">
                       @error('tempat_lahir')
+                        <span class="text-danger">{{ $message }} </span>
+                      @enderror
+                    </div>
+                     <div class="form-group">
+                      <label for="prodi_id">Prodi ID</label>
+                      <select name="prodi_id" class="form-control">
+                        @foreach ($prodi as $item)
+                            <option value="{{ $item['nama'] }}">
+                              {{ $item['nama']}}
+                            </option>
+                        @endforeach
+                      </select>
+                      @error('prodi.id')
+                        <span class="text-danger">{{ $message }} </span>
+                      @enderror
+                    </div>
+                    <div class="form-group">
+                      <label for="url_foto">URL Foto</label>
+                      <input type="text" class="form-control" name="url_foto" value="{{ old('url_foto') }}"placeholder="URL Foto">
+                      @error('url_foto')
                         <span class="text-danger">{{ $message }} </span>
                       @enderror
                     </div>

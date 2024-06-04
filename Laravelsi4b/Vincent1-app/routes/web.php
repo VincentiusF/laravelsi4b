@@ -1,4 +1,4 @@
-<?php
+<!-- #region --><?php
 
 use App\Http\Controllers\FakultasController;
 use App\Http\Controllers\MahasiswaController;

@@ -29,7 +29,6 @@
                         <span class="text-danger">{{ $message }} </span>
                       @enderror
                     </div>
-
                      <div class="form-group">
                       <label for="fakultas_id">Nama Fakultas</label>
                       <select name="fakultas_id" class="form-control">
