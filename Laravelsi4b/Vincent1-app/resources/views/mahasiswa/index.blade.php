@@ -20,6 +20,7 @@
                         <tr>
                           <th>Npm</th>
                           <th>Nama</th>
+                          <th>Foto</th>
                           <th>Tempat Lahir</th>
                           <th>Tanggal Lahir</th>
                           <th>Alamat</th>
@@ -32,11 +33,20 @@
                             <tr>
                                 <td>{{ $item["npm"] }}</td>
                                 <td> {{ $item["nama"] }}</td>
+                                <td><img src="{{ url('foto/'.$item["url_foto"]) }}"></td>
                                 <td> {{ $item["tempat_lahir"] }}</td>
                                 <td> {{ $item["tanggal_lahir"] }}</td>
                                 <td> {{ $item["alamat"] }}</td>
                                 <td> {{ $item["prodi_id"] }}</td>
                                 <td> {{ $item["url_foto"] }}</td>
+                                <td>
+                                  <form action="{{ route('mahasiswa.destroy', $item['id'] )}}" method="post">
+                                    @method('DELETE')
+                                    @csrf
+                                    <button type="submit" class="btn btn-sm btn-rounded btn-danger show_confirm" 
+                                    data-name="{{ $item['nama'] }}">Hapus</button>
+                                  </form>
+                                </td>
                             </tr>
                             @endforeach
                       </tbody>
@@ -46,9 +56,9 @@
               </div>
             </div>
 </div>
-
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @if (session('success'))
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script>
     Swal.fire({
     title: "Sukses",
@@ -57,6 +67,26 @@
   });
   </script>
 @endif
-
-
+<script type="text/javascript">
+     $('.show_confirm').click(function(event) {
+          var form =  $(this).closest("form");
+          var name = $(this).data("name");
+          event.preventDefault();
+          Swal.fire({
+          title: "Apakah anda yakin mau menghapus?",
+          text: "setelah dihapus data tidak bisa dikembalikan",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Ya, hapus"
+        })
+          .then((willDelete) => {
+            if (willDelete) {
+              form.submit();
+            }
+          });
+      });
+  
+</script>
 @endsection

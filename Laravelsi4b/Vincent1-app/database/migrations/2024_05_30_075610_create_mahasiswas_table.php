@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('tempat_lahir',45);
             $table->date('tanggal_lahir');
             $table->string('alamat');
-            $table->foreignId('prodi_id')->constrained('id')->on('prodis');
+            $table->foreign('prodi_id')->references('id')->on('prodis');
             $table->string('url_foto');
             $table->timestamps();
         });

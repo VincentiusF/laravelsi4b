@@ -13,7 +13,7 @@
                     Formulir Tambah Mahasiswa
                   </p>
                   <form method="POST" action="{{ route('mahasiswa.store') }}" 
-                  class="forms-sample">
+                  class="forms-sample" enctype="multipart/form-data">
                   @csrf
                     <div class="form-group">
                       <label for="npm">Npm</label>
@@ -54,7 +54,7 @@
                       <label for="prodi_id">Prodi ID</label>
                       <select name="prodi_id" class="form-control">
                         @foreach ($prodi as $item)
-                            <option value="{{ $item['nama'] }}">
+                            <option value="{{ $item['id'] }}">
                               {{ $item['nama']}}
                             </option>
                         @endforeach
@@ -65,7 +65,7 @@
                     </div>
                     <div class="form-group">
                       <label for="url_foto">URL Foto</label>
-                      <input type="text" class="form-control" name="url_foto" value="{{ old('url_foto') }}"placeholder="URL Foto">
+                      <input type="file" class="form-control" name="url_foto">
                       @error('url_foto')
                         <span class="text-danger">{{ $message }} </span>
                       @enderror
