@@ -13,7 +13,9 @@
                   List data program studi
                   </p>
                   {{-- tombol tambah --}}
-                  <a href="{{ route('prodi.create') }}" class="btn btn-rounded btn-primary">tambah</a>
+                  @can('create', App\prodi::class)
+                    <a href="{{ route('prodi.create') }}" class="btn btn-rounded btn-primary">tambah</a>    
+                  @endcan           
                   <div class="table-responsive">
                     <table class="table">
                       <thead>
